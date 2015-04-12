@@ -10,10 +10,9 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    yelp_array = []
     @user = User.find(params[:id])
     coordinates = { latitude: @user.latitude, longitude: @user.longitude }
-    @yelp_bars = Yelp.client.search_by_coordinates(coordinates, {term: 'bar', radius_filter: 1000, limit: 10}, ).businesses
+    @yelp_bars = Yelp.client.search_by_coordinates(coordinates, {term: 'bar', radius_filter: 1000, limit: 10}).businesses
 
 
     @hash = Gmaps4rails.build_markers(@yelp_bars) do |spot, marker|
